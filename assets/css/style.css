@@ -1,0 +1,107 @@
+.center_content{
+    position:relative;
+    top: 120px;
+}
+
+.heading_text{
+    font-family: 'Fredoka One', cursive;
+    animation: shake 2s infinite;
+    text-shadow: 2px 8px black; 
+}
+
+@keyframes shake {
+    0% {
+        transform: rotate(1deg);
+    }
+
+    25% {
+        transform: rotate(0deg);
+    }
+
+    50% {
+        transform: rotate(-1deg);
+    }
+
+    75% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(1deg);
+    }
+}
+
+.card_prop{
+    font-family: 'roboto',roboto;
+    border-radius: 20px;
+    height: 18rem; 
+    width:18rem;
+}
+.col-center-block {
+    float: none;
+
+    margin: 0 auto;
+    /* margin-left: auto; margin-right: auto; */
+}
+
+.btn_styles{
+    position: absolute;
+    
+    
+
+}
+
+.nav-tabs{
+    border-bottom: none;
+}
+
+.form .nav-tabs .nav-link{
+    background-color: white;
+    border-radius: none;
+}
+
+
+.form .nav-items .nav-tabs .nav-link{
+    width: 50%;
+}
+.modal-header-style{
+    border-bottom:none;
+    padding:0;
+}
+
+.nav-tabs .nav-link{
+    width: 249px;
+    height: 65px;
+    align-self: center;
+    justify-content: center;
+    align-items: center;
+    font-size: x-large;
+    background-color: #ededed;
+}
+.sum{
+    position: relative;
+    left:83%
+}
+
+.forgot{
+   display: flex;
+   justify-content: flex-end;
+}
+
+
+element.style {
+    position: absolute;
+    transform: translate3d(-37px, 64px, 0px);
+    top: 0px;
+    left: 0px;
+    will-change: transform;
+}
+.dropdown-menu.show {
+    display: block;
+}
+.dropdown-menu[x-placement^=bottom], .dropdown-menu[x-placement^=left], .dropdown-menu[x-placement^=right], .dropdown-menu[x-placement^=top] {
+    right: auto;
+    bottom: auto;
+    /* margin-block-end: 10px; */
+    margin-right: 2rem;
+}
