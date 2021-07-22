@@ -20,8 +20,7 @@
             //call methods for validation
             $this->check_name($name);
             $this->check_email($email);
-            $this->check_password($password);
-            $this->check_phone($phone);
+   
            
         }
 
@@ -39,17 +38,6 @@
                 $this->invalid_mail=true;
            }
         }
-          private function check_password($password){
-            if ($password<=8) {
-                    $this->invalid_password=true;
-            }
-
-        }
-        private function check_phone($phone){
-            if($phone<10=){
-                
-            }
-        }   
 
 
 
@@ -63,6 +51,3 @@
 
       
     }
-   
-
-?>
