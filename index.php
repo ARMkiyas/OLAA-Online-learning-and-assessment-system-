@@ -309,7 +309,7 @@ if(isset($_GET['registor_error']))
                                 </div>
                                 <div class="form-group">
                                     <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input" name="agree" id="agree" required>
+                                        <input type="checkbox" class="custom-control-input" name="agree" value="agree" id="agree" required>
                                         <label for="agree" class="custom-control-label">I agree to the Terms and Conditions, and I hereby declare that the information given above is true and accurate to the best of my knowledge </label>
                                     </div>
                                 </div>
