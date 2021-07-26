@@ -13,7 +13,7 @@ class validation
 
     // extras
 
-    private $country_code;            
+    private $country_code;
     // variables for store form data
 
 
@@ -29,6 +29,7 @@ class validation
         $this->check_password($password, $con_password);
         $this->check_phone($phone);
         $this->check_country($country);
+        $this->check_profile($profile_pic);
     }
 
     // name  validation  function
@@ -57,7 +58,7 @@ class validation
         foreach ($data as $row) {
             if ($row['name'] == $country) {
                 $this->invalid_country = false;
-                $this->country_code=$row["callingCodes"][0];
+                $this->country_code = $row["callingCodes"][0];
                 break;
             }
         }
@@ -89,6 +90,32 @@ class validation
         }
     }
 
+    // profile picture validation function
+
+    private function check_profile($pic)
+    {   
+
+        $allowed_files = array("png", "jpg", "jpeg");
+
+        
+
+        if(!$pic['error'] > 0){
+
+
+            $file_name_extension =strtolower(pathinfo(basename($pic['name']), PATHINFO_EXTENSION));
+            $check=getimagesize($pic['tmp_name']);
+            if($check==false){
+                $this->invalid_file=true;
+            }
+            if(!in_array($file_name_extension,$allowed_files)){
+                $this->invalid_file=true;
+            }
+            if($pic['size']>=5120){
+                $this->invalid_file=true;   
+            }
+        }
+    }
+
     function show()
     {
         $out = array("name" => $this->invalid_name, "mail" => $this->invalid_mail, "country" => $this->invalid_country, "phone" => $this->invalid_phone_no, "passsword" => $this->invalid_password, "pro_pic" => $this->invalid_file, "agree" => $this->invalid_agree);
@@ -96,7 +123,8 @@ class validation
         print_r($out);
     }
 
-    function get_country_code(){
-        return "+".$this->country_code;
+    function get_country_code()
+    {
+        return "+" . $this->country_code;
     }
 }

@@ -210,7 +210,7 @@ if(isset($_GET['registor_error']))
                         <!-- sign up form -->
                         <div class="tab-pane fade <?php if($registor_error==1){ echo 'show active';} ?>" id="signup" role="tabpanel" aria-labelledby="registor-tab">
 
-                            <form action="/pages/register.php" method="post" class="signup_form" novalidate>
+                            <form enctype="multipart/form-data" action="/pages/register.php"  method="post" class="signup_form" novalidate>
                                 <div class="form-group">
                                     <label for="name">Name<sup class="text-danger">*</sup></label>
                                     <div class="input-group">
@@ -305,7 +305,7 @@ if(isset($_GET['registor_error']))
                                         </div>
 
                                     </div>
-                                    <small class="text-muted" for="file">note: only jpg and png files are allowed</small>
+                                    <small class="text-muted" for="file">note: only png, jpeg and jpg image formats are allowed and image size must be less than 5MB</small>
                                 </div>
                                 <div class="form-group">
                                     <div class="custom-control custom-checkbox">

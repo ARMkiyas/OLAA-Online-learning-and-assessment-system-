@@ -1,7 +1,8 @@
 
-
-
 $(document).ready(function () {
+
+  
+
 let country_list;  
 let xhttp = new XMLHttpRequest();
 xhttp.open("get", 'https://restcountries.eu/rest/v2/all?fields=name');
@@ -58,8 +59,8 @@ function update_country(country_name){
 
 
   $("#profile_pic").change(function () {
-    let val = $("#profile_pic").val();
-    $(".custom-file-label").html(val);
+    let val = $("#profile_pic")[0]
+   $(".custom-file-label").html(val.files[0]['name']);
   })
 
 
@@ -110,15 +111,18 @@ function update_country(country_name){
 
 
   jQuery.validator.addMethod("file_valid", function (value, element) {
-
+    console.log(element.files[0]['size']);
+    let image_size = element.files[0]['size'];
+    console.log(image_size);
     let fil = value.split(".").pop().toLowerCase();
-    if (fil == "jpg" || fil == "png" || value.trim() == "") {
+    if (fil == "jpg" || fil == "png" || fil == "jpeg"|| value.trim() == "" && image_size<=5242880) {
       return true;
     } else {
       return false;
     }
-  }, "only png and jpg files are allowed");
+  }, "only png,jpg and jpeg image formats are allowed");
 
+  
 
 
 
