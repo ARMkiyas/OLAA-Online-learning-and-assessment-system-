@@ -105,12 +105,15 @@ class validation
             $file_name_extension =strtolower(pathinfo(basename($pic['name']), PATHINFO_EXTENSION));
             $check=getimagesize($pic['tmp_name']);
             if($check==false){
+                echo "check";
                 $this->invalid_file=true;
             }
             if(!in_array($file_name_extension,$allowed_files)){
+                echo "arr";
                 $this->invalid_file=true;
             }
-            if($pic['size']>=5120){
+            if($pic['size']>=5242880){
+                echo "size";
                 $this->invalid_file=true;   
             }
         }
