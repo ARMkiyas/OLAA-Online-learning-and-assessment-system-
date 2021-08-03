@@ -1,49 +1,76 @@
 $(document).ready(function () {
 
+ const url = 'https://restcountries.eu/rest/v2/all?fields=name'
 
 
-  let country_list;
-  let xhttp = new XMLHttpRequest();
-  xhttp.open("get", 'https://restcountries.eu/rest/v2/all?fields=name');
-  xhttp.send();
-  xhttp.onreadystatechange = function () {
-    if (this.readyState == 4 && this.status == 200) {
 
-      window.country_list = JSON.parse(this.responseText);
-    }
+  jQuery.ajax({
+    url: url,
+    type: "GET",
+    success: function (result) {
 
-
-  }
-
-  setTimeout(function () {
-    for (let i = 0; i < window.country_list.length; i++) {
-      update_country(window.country_list[i].name);
-    }
-
-    function search_country(input) {
-
-      for (let i = 0; i < window.country_list.length; i++) {
-        if (window.country_list[i].name == input) {
-
-          return true;
-          break;
+        // console.log(country_list);
+        for (let i = 0; i < result.length; i++) {
+          update_country(result[i].name);
         }
-      }
+
+        function search_country(input) {
+
+          for (let i = 0; i < result.length; i++) {
+            if (result[i].name == input) {
+
+              return true;
+              break;
+            }
+          }
+        }
+
+        jQuery.validator.addMethod("s", function (value, element) {
+          if (value != 0 && search_country(value) && value != "") {
+            return true;
+          } else {
+            return false;
+          }
+        }, "Select your country name");
+
+    },
+    error: function (error) {
+      console.log("asdf");
     }
+  })
 
-    jQuery.validator.addMethod("s", function (value, element) {
-      if (value != 0 && search_country(value) && value != "") {
-        return true;
-      } else {
-        return false;
-      }
-    }, "Select your country name");
 
-  }, 1000)
+ 
 
+  // setTimeout(function () {
+  //   // console.log(country_list);
+  //   for (let i = 0; i < country_list.length; i++) {
+  //     update_country(country_list[i].name);
+  //   }
+
+  //   function search_country(input) {
+
+  //     for (let i = 0; i < country_list.length; i++) {
+  //       if (window.country_list[i].name == input) {
+
+  //         return true;
+  //         break;
+  //       }
+  //     }
+  //   }
+
+  //   jQuery.validator.addMethod("s", function (value, element) {
+  //     if (value != 0 && search_country(value) && value != "") {
+  //       return true;
+  //     } else {
+  //       return false;
+  //     }
+  //   }, "Select your country name");
+
+  // }, 100)
 
   function update_country(country_name) {
-    $(".custom-select").append(`<option value=\"${country_name}\">${country_name}</option>`)
+    $(".custom-select").append("<option value=\"" + country_name + "\">" + country_name + "</option>");
   }
 
 
@@ -128,7 +155,7 @@ $(document).ready(function () {
       } else {
         return false;
       }
-    }else{
+    } else {
       return true;
     }
   })

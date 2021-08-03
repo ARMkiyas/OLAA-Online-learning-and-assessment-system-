@@ -47,13 +47,13 @@ if(isset($_GET['registor_error']))
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>game</title>
 
-    <!-- fonts -->
+
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/assets/css/all.min.css">
-    <!-- ----------------------------------------------------------------- -->
-    <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="./assets/css/style.css">
+ 
+    <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/css/style.css">
 </head>
 
 <body style="background-color:#4393BD;" class="">

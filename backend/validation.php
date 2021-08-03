@@ -121,9 +121,15 @@ class validation
 
     function show()
     {
-        $out = array("name" => $this->invalid_name, "mail" => $this->invalid_mail, "country" => $this->invalid_country, "phone" => $this->invalid_phone_no, "passsword" => $this->invalid_password, "pro_pic" => $this->invalid_file, "agree" => $this->invalid_agree);
-
-        print_r($out);
+        $valid = array("user_name" => $this->invalid_name, "signup_email" => $this->invalid_mail, "country" => $this->invalid_country, "user_phone" => $this->invalid_phone_no, "signup_password" => $this->invalid_password, "profile_pic" => $this->invalid_file, "agree" => $this->invalid_agree);
+        $out=array();
+        foreach($valid as $name =>$value ){
+            if($value==true){
+                $out+=array($name=>$value);
+            }
+        }
+        return $out;
+        
     }
 
     function get_country_code()

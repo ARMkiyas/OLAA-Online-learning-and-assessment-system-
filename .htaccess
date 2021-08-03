@@ -1,6 +1,6 @@
  
 # Secure php.ini and .htaccess
-RewriteRule ^(php\\.ini|\\.htaccess) - [NC,F]
+#RewriteRule ^(php\\.ini|\\.htaccess) - [NC,F]
 
 ErrorDocument 404 /errorpages/404.php
 ErrorDocument 403 /errorpages/404.php
