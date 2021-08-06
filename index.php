@@ -367,7 +367,7 @@ if(isset($_GET['registor_error']))
 
     <script type="text/javascript" src="/assets/js/popper.js"></script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
+    <script src="/assets/js/jquery_validate.js"></script>
 
     <script src="/assets/js/main.js"></script>
 
