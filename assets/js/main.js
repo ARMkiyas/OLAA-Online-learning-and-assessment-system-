@@ -163,6 +163,7 @@ $(document).ready(function () {
 
 
 
+
   $(".signup_form").validate({
     errorClass: "invalid-feedback",
     rules: {

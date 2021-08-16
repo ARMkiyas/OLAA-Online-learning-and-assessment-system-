@@ -139,7 +139,7 @@ class validation
         $valid = array("user_name" => $this->invalid_name, "signup_email" => $this->invalid_mail, "country" => $this->invalid_country, "user_phone" => $this->invalid_phone_no, "signup_password" => $this->invalid_password, "profile_pic" => $this->invalid_file, "agree" => $this->invalid_agree,"mail_in_use"=>$this->mail_in_use);
         $out = array();
         foreach ($valid as $name => $value) {
-            if ($value == true) {
+            if ($value) {
                 $out += array($name => $value);
             }
         }
@@ -150,7 +150,16 @@ class validation
     {
         return "+" . $this->country_code;
     }
+
+    function invalid_password(){
+
+        return $this->invalid_password;
+
+    }
+
     function mail_in_use(){
         return $this->mail_in_use;
     }
+
+
 }

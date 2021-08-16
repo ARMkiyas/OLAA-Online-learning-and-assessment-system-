@@ -1,36 +1,40 @@
 <?php
-$registor_error=0;
-$re_mail=0;
+$registor_error = 0;
+$re_mail = 0;
 require_once "backend/conn.php";
 session_start();
-$_SESSION["session_id"]=null;
+$_SESSION["session_id"] = null;
 
 
-if (isset($_POST['sign_in'])) { 
-
-
+if (isset($_POST['sign_in'])) {
 }
-if (isset($_POST['register'])){
-
-
+if (isset($_POST['register'])) {
 }
 
-if(isset($_GET['registor_error']))
-{  
-    if($_GET['registor_error']==1){
-        $registor_error=1;
-        if(isset($_GET['mail_in'])){
-            if($_GET['mail_in']==1){
-                $re_mail=1;
-            }else{
-                $re_mail=0;
+if (isset($_GET['registor_error'])) {
+    if ($_GET['registor_error'] == 1) {
+        $registor_error = 1;
+        $get_value = array('user_name' => '',  'email' => '', 'country' => '', 'phone' => '', "mail_in" => '',"password_invalid"=>'');
+
+        foreach ($get_value as $name => $value) {
+            if (isset($_GET[$name])) {
+                $get_value[$name] = $_GET[$name];
+                echo "<script> console.log(\"$get_value[$name]\");</script>";
             }
         }
+
+
+
+        if (isset($_GET['mail_in'])) {
+            if ($_GET['mail_in'] == 1) {
+                $re_mail = 1;
+            } else {
+                $re_mail = 0;
+            }
+        }
+    } else {
+        $registor_error = 0;
     }
-    else{
-        $registor_error=0;
-    }
-   
 }
 
 
@@ -51,16 +55,17 @@ if(isset($_GET['registor_error']))
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/assets/css/all.min.css">
- 
+
     <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="/assets/css/style.css">
+
 </head>
 
 <body style="background-color:#4393BD;" class="">
 
     <div class="d-flex justify-content-end mr-5 mt-2">
-    <?php if (isset($_SESSION["session_id"])) {
-                                echo "  <div class=\"dropdown\">
+        <?php if (isset($_SESSION["session_id"])) {
+            echo "  <div class=\"dropdown\">
                                 <button class=\"btn dropdown-toggle\" id=\"profile_dropdown\" type=\"button\" data-toggle=\"dropdown\">
                                     <img src=\"/up_files/profile.png\" height=\"50\" width=\"50\" class=\"img-fluid rounded-circle\" alt=\"profile_pic\">
                                 </button>
@@ -70,12 +75,12 @@ if(isset($_GET['registor_error']))
                     
                                 </div>
                             </div>";
-                            } else {
-                                echo " <div class=\"btn btn-success btn_styles m-3 rounded-pill\" id=\"btn_active\" data-toggle=\"modal\" id=\"start\" data-target=\"#account\">Get started</div>
+        } else {
+            echo " <div class=\"btn btn-success btn_styles m-3 rounded-pill\" id=\"btn_active\" data-toggle=\"modal\" id=\"start\" data-target=\"#account\">Get started</div>
                                 ";
-                            }  ?>   
-      
-      
+        }  ?>
+
+
     </div>
     <div class="container center_content">
 
@@ -142,16 +147,20 @@ if(isset($_GET['registor_error']))
 
     <!-- form modal -->
 
-    <div class="modal fade show"  id="account" tabindex="-1" role="dialog">
+    <div class="modal fade show" id="account" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header modal-header-style">
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
                         <li class="nav-item" role="presentation">
-                            <a class="nav-link <?php if($registor_error==0){ echo 'active';}?>" id="home-tab" data-toggle="tab" href="#login" role="tab" aria-controls="home" aria-selected="true">Sign In</a>
+                            <a class="nav-link <?php if ($registor_error == 0) {
+                                                    echo 'active';
+                                                } ?>" id="home-tab" data-toggle="tab" href="#login" role="tab" aria-controls="home" aria-selected="true">Sign In</a>
                         </li>
                         <li class="nav-item" role="presentation">
-                            <a class="nav-link <?php if($registor_error==1){ echo 'active';}?>" id="profile-tab" data-toggle="tab" href="#signup" role="tab" aria-controls="profile" aria-selected="false">Register</a>
+                            <a class="nav-link <?php if ($registor_error == 1) {
+                                                    echo 'active';
+                                                } ?>" id="profile-tab" data-toggle="tab" href="#signup" role="tab" aria-controls="profile" aria-selected="false">Register</a>
                         </li>
 
                     </ul>
@@ -161,7 +170,9 @@ if(isset($_GET['registor_error']))
                 <div class="modal-body form">
                     <div class="tab-content" id="myTabContent">
                         <!-- sign form  -->
-                        <div class="tab-pane fade <?php if($registor_error==0){ echo 'show active';} ?>" id="login" role="tabpanel" aria-labelledby="signin-tab">
+                        <div class="tab-pane fade <?php if ($registor_error == 0) {
+                                                        echo 'show active';
+                                                    } ?>" id="login" role="tabpanel" aria-labelledby="signin-tab">
 
 
                             <form action="<?php echo $_SERVER["PHP_SELF"]; ?>" method="post" role="form" class="login_form" novalidate>
@@ -208,9 +219,11 @@ if(isset($_GET['registor_error']))
                         </div>
 
                         <!-- sign up form -->
-                        <div class="tab-pane fade <?php if($registor_error==1){ echo 'show active';} ?>" id="signup" role="tabpanel" aria-labelledby="registor-tab">
+                        <div class="tab-pane fade <?php if ($registor_error == 1) {
+                                                        echo 'show active';
+                                                    } ?>" id="signup" role="tabpanel" aria-labelledby="registor-tab">
 
-                            <form enctype="multipart/form-data" action="/pages/register.php"  method="post" class="signup_form" novalidate>
+                            <form enctype="multipart/form-data" action="/pages/register.php" method="post" class="signup_form" novalidate>
                                 <div class="form-group">
                                     <label for="name">Name<sup class="text-danger">*</sup></label>
                                     <div class="input-group">
@@ -220,7 +233,8 @@ if(isset($_GET['registor_error']))
                                             </div>
 
                                         </div>
-                                        <input type="text" name="user_name" class="form-control" id="name" placeholder="Mohammed farnas" required>
+                                        <input type="text" name="user_name" class="form-control" id="name" value="<?php if($registor_error==1){
+                                           if(!empty(trim($get_value['user_name']))){echo $get_value['user_name'];} }?>" placeholder="Mohammed farnas" required>
 
                                     </div>
                                 </div>
@@ -232,12 +246,16 @@ if(isset($_GET['registor_error']))
                                                 <i class="fas fa-envelope"></i>
                                             </div>
                                         </div>
-                                        <input type="text" name="signup_email" class="form-control <?php if ($re_mail==1){echo 'is-invalid';}?>" id="email" placeholder="farnas@abc.com" required>
-                                        <label id="email-error" class="invalid-feedback" for="email">You entered mail already in use</label>
+                                        <input type="text" id="email_sign_up" name="signup_email"  value="<?php if($registor_error==1){
+                                           if(!empty(trim($get_value['email']))){echo $get_value['email'];} }?>" class="form-control <?php if ($registor_error == 1) {
+                                                                                                                                        if(trim($get_value['mail_in'])==1){echo 'is-invalid';}
+                                                                                                        
+                                                                                                    } ?>" id="email" placeholder="farnas@abc.com" required>
+                                       <?php if($registor_error==1){if(trim($get_value['mail_in'])==1){ echo ' <label class="custom-invalid" for="email">You entered mail already in use</label>';}} ?>
 
 
                                     </div>
-                                
+
                                     <small for="email" class="text-muted">We'll never share your email with anyone else.</small>
                                 </div>
                                 <div class="form-group">
@@ -247,8 +265,10 @@ if(isset($_GET['registor_error']))
                                             <div class="input-group-text"><i class="fas fa-globe-asia"></i></div>
                                         </div>
                                         <select class="custom-select" name="country">
-                                            <option class="selected." value="0" selected>Choose...</option>
-                                            
+                                            <option class="selected."  value="<?php if($registor_error==1){
+                                           if(!empty(trim($get_value['country']))){echo $get_value['country'];}else{echo 0;} }else{echo 0;}?>" selected><?php if($registor_error==1){
+                                            if(!empty(trim($get_value['country']))){echo $get_value['country'];}else{echo "Choose...";} }else{echo "Choose...";}?></option>
+
                                         </select>
                                     </div>
                                 </div>
@@ -261,7 +281,8 @@ if(isset($_GET['registor_error']))
                                                 <i class="fas fa-phone-alt"></i>
                                             </div>
                                         </div>
-                                        <input type="number" name="user_phone" class="form-control" id="phone" placeholder="0123456789">
+                                        <input type="number" name="user_phone"  class="form-control" id="phone" placeholder="0123456789" value="<?php if($registor_error==1){
+                                           if(!empty(trim($get_value['phone']))){echo $get_value['phone'];} }?>">
                                     </div>
                                     <small class="text-muted" for="phone">we'll never share your phone number with anyone else.</small>
 
@@ -274,8 +295,8 @@ if(isset($_GET['registor_error']))
                                                 <i class="fas fa-key"></i>
                                             </div>
                                         </div>
-                                        <input type="password" name="signup_password" class="form-control" id="signup_password" placeholder="Password" value="" required>
-
+                                        <input type="password" name="signup_password" class="form-control <?php if($registor_error==1){if(trim($get_value['password_invalid'])==1){echo "is-invalid";}} ?>" id="signup_password" placeholder="Password" value="" required>
+                                    <?php if($registor_error==1){if(trim($get_value['password_invalid'])==1){echo '<label id="email" class="custom-invalid" for="email">You entered password is invalid or not verified</label>';}} ?>
 
                                     </div>
 
@@ -288,7 +309,7 @@ if(isset($_GET['registor_error']))
                                                 <i class="fas fa-key"></i>
                                             </div>
                                         </div>
-                                        <input type="password" name="con_signup_password" class="form-control" id="con_password"  placeholder="Password" value="" required>
+                                        <input type="password" name="con_signup_password" class="form-control" id="con_password" placeholder="Password" value="" required>
 
                                     </div>
 
@@ -350,14 +371,7 @@ if(isset($_GET['registor_error']))
         </div>
     </div>
 
-<?php if($registor_error==1){ echo '<script>
-   let btn= document.getElementById("btn_active");
 
-   setTimeout(() => {
-   btn.click();
-   }, 100);
-
-</script>'; } ?>
     <!-- -------------------------------scripts------------------------------------- -->
 
 
@@ -371,6 +385,73 @@ if(isset($_GET['registor_error']))
 
     <script src="/assets/js/main.js"></script>
 
+
+    <?php if ($registor_error == 1) {
+        echo '<script>
+   
+$(window).on("load", ()=> {
+    let btn= document.getElementById("btn_active");
+
+   setTimeout(() => {
+   btn.click();
+   }, 100);
+
+    let  form=$(".signup_form");
+
+    setTimeout(() => {
+
+       form.valid();
+
+      
+    },1000);
+
+
+})    
+
+</script>   
+
+
+
+
+';
+
+
+if(trim($get_value['mail_in'])==1){
+    
+    echo'
+    
+    <script type="text/javascript">
+$(window).on("load",()=>{
+
+
+    let d=$("#email_sign_up");
+
+setTimeout(() => {
+    d.removeClass("is-valid");
+    d.addClass("is-invalid");
+    console.log("dsg");
+},1000)
+
+
+})
+    ';
+
+
+
+
+}
+
+    }
+    
+    ?>
+
+
+
+      
+
+
+
+</script>
 
 </body>
 
